@@ -1,0 +1,57 @@
+.container {
+    width: 40rem;
+    margin: auto;
+    padding: 4rem 2rem;
+    background-color: rgba(30, 30, 30, 0.7);
+    border-radius: 4rem;
+}
+
+.habit {
+    display: flex;
+    justify-content: space-around;
+    border: 1px white solid;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    margin: 1rem 0;
+    color: white;
+    background-color: rgb(29, 29, 29);
+}
+
+.name {
+    width: 50%;
+    text-align: left;
+}
+
+.btn_container {
+    margin: 1.35rem 0;
+    display: flex;
+    gap: 1rem;
+}
+
+.increment,
+.decrement {
+    all: unset;
+    cursor: pointer;
+    padding: 0 0.75rem;
+    border-radius: 2px;
+    transition: 50ms;
+    color: black;
+}
+
+.increment {
+    background-color: green;
+}
+
+.decrement {
+    font-size: 1.25rem;
+    background-color: red;
+
+}
+
+.increment:active {
+    background-color: rgb(0, 180, 0);
+}
+
+.decrement:active {
+    background-color: rgb(180, 0, 0);
+}
