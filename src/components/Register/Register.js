@@ -1,7 +1,9 @@
 import React from 'react';
-import classes from './inputForm.module.css';
+import classes from './register.module.css';
 import { Backdrop } from '../Backdrop/Backdrop'
 import ReactDOM from "react-dom";
+
+
 
 const ModalOverlay = (props) => {
 
@@ -10,21 +12,14 @@ const ModalOverlay = (props) => {
     return (
         <form className={classes.container} onSubmit={submitHandler}>
             <div>
-                <input type='text' placeholder='Habit name' className={classes.habit_input} />
+                <input type='text' placeholder='Username' className={classes.login_input} />
             </div>
-            <div>
-                <select name="duration" id="duration">
-                    <option value="daily">Daily</option>
-                    <option value="weekly">Weekly</option>
-                    <option value="monthly">Monthly</option>
-                </select>
-            </div>
-            <button type='submit'>Submit</button>
+            <button type='submit'>Sign up</button>
         </form>
     )
 };
 
-export const InputForm = () => {
+export const Register = () => {
 
     const clickHandler = () => { };
 
@@ -39,4 +34,3 @@ export const InputForm = () => {
         </React.Fragment>
     )
 };
-
