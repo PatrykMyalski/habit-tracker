@@ -7,10 +7,17 @@ import ReactDOM from "react-dom";
 
 const ModalOverlay = (props) => {
 
-    const submitHandler = () => { };
+    const submitHandler = (event) => {
+        event.preventDefault();
+        // validating register username
+        // making api
+        // if validated 
+        props.onClick()
+    };
 
     return (
         <form className={classes.container} onSubmit={submitHandler}>
+            <h1>Create Acount</h1>
             <div>
                 <input type='text' placeholder='Username' className={classes.login_input} />
             </div>
@@ -19,17 +26,17 @@ const ModalOverlay = (props) => {
     )
 };
 
-export const Register = () => {
+export const Register = (props) => {
 
-    const clickHandler = () => { };
+
 
 
 
     return (
         <React.Fragment>
-            <Backdrop onClick={clickHandler} />
+            <Backdrop />
             {ReactDOM.createPortal(
-                <ModalOverlay />,
+                <ModalOverlay onClick={props.onClick}/>,
                 document.getElementById('modal-root'))}
         </React.Fragment>
     )

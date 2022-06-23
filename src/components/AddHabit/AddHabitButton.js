@@ -1,11 +1,9 @@
- import classes from './addHabitButton.module.css';
- export const AddHabitButton = () => {
+ import finalPropsSelectorFactory from 'react-redux/es/connect/selectorFactory';
+import classes from './addHabitButton.module.css';
+ export const AddHabitButton = (props) => {
     
-    const addHandler = () => {
-
-    };
     return (
-        <button type="button" onClick={addHandler} className={classes.btn}>+ Add Habit</button>
+        <button type="button" onClick={props.onClick} className={classes.btn}>+ Add Habit</button>
     )
  };
 

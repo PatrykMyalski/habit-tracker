@@ -8,7 +8,7 @@ export const Habit = (props) => {
 
     return (
         <div className={classes.habit}>
-            <h2 className={classes.name}>{props.data.habit}</h2>
+            <h2 className={classes.name}>{props.data.name}</h2>
             <h2>{props.data.strike}</h2>
             <div className={classes.btn_container}>
                 <button type='button' onClick={incrementHandler} className={classes.increment}>+</button>

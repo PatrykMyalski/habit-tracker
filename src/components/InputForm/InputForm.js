@@ -5,7 +5,11 @@ import ReactDOM from "react-dom";
 
 const ModalOverlay = (props) => {
 
-    const submitHandler = () => { };
+    const submitHandler = (event) => {
+        event.preventDefault();
+        // validation and adding new habit
+        props.onClick();
+    };
 
     return (
         <form className={classes.container} onSubmit={submitHandler}>
@@ -24,9 +28,11 @@ const ModalOverlay = (props) => {
     )
 };
 
-export const InputForm = () => {
+export const InputForm = (props) => {
 
-    const clickHandler = () => { };
+    const clickHandler = () => {
+        props.onClick();
+    };
 
 
 
@@ -34,7 +40,7 @@ export const InputForm = () => {
         <React.Fragment>
             <Backdrop onClick={clickHandler} />
             {ReactDOM.createPortal(
-                <ModalOverlay />,
+                <ModalOverlay onClick={clickHandler}/>,
                 document.getElementById('modal-root'))}
         </React.Fragment>
     )

@@ -4,20 +4,56 @@ import { InputForm } from './components/InputForm/InputForm';
 import { AddHabitButton } from './components/AddHabit/AddHabitButton';
 import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
+import { useReducer } from 'react';
+
+
+
+const navReducer = (state, action) => {
+  switch (action.type) {
+    case 'LOGIN':
+      return { ...state, showLogin: !state.showLogin };
+    case 'LOGIN-REGISTER':
+      return { ...state, showLogin: !state.showLogin, showRegister: !state.showRegister };
+    case 'REGISTER':
+      return { ...state, showRegister: !state.showRegister };
+    case 'ADD-NEW':
+      return { ...state, showAddHabit: !state.showAddHabit };
+    default:
+      return state;
+  };
+
+};
+
 
 
 function App() {
 
+  const [navState, dispatchNav] = useReducer(navReducer, {
+    showLogin: true,
+    showRegister: false,
+    showAddHabit: false,
+  });
 
-
+  const loginHandler = () => {
+    dispatchNav({ type: 'LOGIN' });
+  };
+  const newUserHandler = () => {
+    dispatchNav({ type: 'LOGIN-REGISTER' });
+  };
+  const registerHandler = () => {
+    dispatchNav({ type: 'REGISTER' });
+  };
+  const addHabitHandler = () => {
+    dispatchNav({ type: 'ADD-NEW' });
+  };
 
   return (
     <div className={classes.main}>
-      <AddHabitButton />
-      <HabitsList />      
-      <Login />
-      <Register />
-      {/* <InputForm /> */}
+      {!navState.showLogin && <AddHabitButton onClick={addHabitHandler} />}
+      {!navState.showLogin && <HabitsList /> }
+      {navState.showLogin && <Login onClick={loginHandler} onRegister={newUserHandler} />}
+      {navState.showRegister && <Register onClick={registerHandler} />}
+      {navState.showAddHabit && <InputForm onClick={addHabitHandler} />}
     </div>
   );
 };
