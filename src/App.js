@@ -15,7 +15,7 @@ const navReducer = (state, action) => {
     case 'LOGIN-REGISTER':
       return { ...state, showLogin: !state.showLogin, showRegister: !state.showRegister };
     case 'REGISTER':
-      return { ...state, showRegister: !state.showRegister };
+      return { ...state, showRegister: !state.showRegister, showLogin: !state.showLogin };
     case 'ADD-NEW':
       return { ...state, showAddHabit: !state.showAddHabit };
     default:
@@ -49,8 +49,8 @@ function App() {
 
   return (
     <div className={classes.main}>
-      {!navState.showLogin && <AddHabitButton onClick={addHabitHandler} />}
-      {!navState.showLogin && <HabitsList /> }
+      {!navState.showLogin & !navState.showRegister && <AddHabitButton onClick={addHabitHandler} />}
+      {!navState.showLogin & !navState.showRegister && <HabitsList /> }
       {navState.showLogin && <Login onClick={loginHandler} onRegister={newUserHandler} />}
       {navState.showRegister && <Register onClick={registerHandler} />}
       {navState.showAddHabit && <InputForm onClick={addHabitHandler} />}

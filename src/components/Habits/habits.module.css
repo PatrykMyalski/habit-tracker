@@ -5,6 +5,9 @@
     background-color: rgba(30, 30, 30, 0.7);
     border-radius: 4rem;
 }
+.container h1 {
+    color: white;
+}
 
 .habit {
     display: flex;

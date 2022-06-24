@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import classes from './login.module.css';
 import { Backdrop } from '../Backdrop/Backdrop';
 import ReactDOM from "react-dom";
@@ -9,31 +9,39 @@ import { HabitsContext } from '../data/habits-context';
 const ModalOverlay = (props) => {
 
     const [username, setUserName] = useState(null);
+    const [showError, setShowError] = useState(false);
     const { sendRequest: login } = useHttp();
     const ctx = useContext(HabitsContext);
 
     const submitHandler = (event) => {
         event.preventDefault();
-        login(`https://habit-tracker-b1444-default-rtdb.europe-west1.firebasedatabase.app/data/users/${username}.json`,
+        login(`https://habit-tracker-b1444-default-rtdb.europe-west1.firebasedatabase.app/data/users.json`,
             { method: 'GET' }, loginUser, invalidUser);
     };
 
     const loginUser = (data) => {
-        ctx.data = data;
-        props.onClick();
+        for (const item in data) {
+            if (data[item].user === username.trim()) {
+                ctx.data = data[item];
+                props.onClick();
+            } else {
+                invalidUser();
+            };
+        };
     };
 
     const invalidUser = () => {
-        console.log('INVALID USER'); // jeżeli nie znajdzie usera, wtedy zostanie uruchomiona ta funkcja 
+        setShowError(true);
     };
 
     return (
-
         <form className={classes.container} onSubmit={submitHandler}>
             <h1>Login</h1>
             <div>
-                <input type='text' placeholder='Username' className={classes.login_input} onChange={(event) => { setUserName(event.target.value) }} />
+                <input type='text' placeholder='Username' className={`${classes.login_input} ${showError && classes.invalid}`} onChange={(event) => { setUserName(event.target.value) }} />
+                {showError && <h2>Cannot find user.</h2>}
             </div>
+
             <button type='button' onClick={props.onRegister}>Sign up</button>
             <button type='submit'>Login</button>
         </form>

@@ -13,7 +13,12 @@ export const HabitsList = () => {
     return (
         <div className={classes.container}>
             {ctx.data.habits.map(item => {
-                return <Habit key={Math.random()} data={item} />
+                if (item === 'noHabits') {
+                    return <h1 key={Math.random()}>Add First Habit!</h1>
+                } else {
+                    return <Habit key={Math.random()} data={item} />
+                }
+                
             })}
         </div>
     )
