@@ -41,7 +41,7 @@ const ModalOverlay = (props) => {
                     registerUser, invalidUser);
                 props.onClick();
             };
-        }, 100);
+        }, 50);
 
     };
     const checkIfTaken = (data) => {
@@ -74,7 +74,10 @@ const ModalOverlay = (props) => {
         <form className={classes.container} onSubmit={submitHandler}>
             <h1>Create Acount</h1>
             <div>
-                <input type='text' placeholder='Username' className={`${classes.register_input} ${shortError || taken && classes.invalid}`} onChange={(event) => { setNewUserName(event.target.value) }} />
+                <input type='text' placeholder='Username'
+                    className={`${classes.register_input} ${shortError || taken ? classes.invalid : ''}`}
+                    onChange={(event) => { setNewUserName(event.target.value) }}
+                />
                 {shortError && <h2>Username must have at least 3 letters!</h2>}
                 {taken && <h2>Username is taken!</h2>}
             </div>

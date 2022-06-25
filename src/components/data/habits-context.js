@@ -1,6 +1,8 @@
 import React from "react"
 
 export const HabitsContext = React.createContext({
-    data: null
+    data: null,
+    key: null,
+    added: 0,
 });
 

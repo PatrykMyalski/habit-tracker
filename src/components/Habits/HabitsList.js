@@ -1,25 +1,43 @@
-import classes from './habits.module.css'
+import classes from './habits.module.css';
 import { Habit } from './Habit';
 import { HabitsContext } from '../data/habits-context';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { useHttp } from '../../hook/api-call';
 
 export const HabitsList = () => {
 
     const ctx = useContext(HabitsContext);
 
-    console.log(ctx.data)
+    const { sendRequest: getHabits } = useHttp();
+    const [habits, setHabits] = useState(ctx.data.habits);
 
+
+    useEffect(() => {
+
+        getHabits(`https://habit-tracker-b1444-default-rtdb.europe-west1.firebasedatabase.app/data/users/${ctx.key}.json`,
+            { method: 'GET' }, habitsProvider, errorHandler);
+
+    }, [ctx.added]);
+
+    const habitsProvider = (data) => {
+        setHabits(data.habits);
+        ctx.data = data;
+    };
+
+    const errorHandler = () => { };
+
+    let show = [];
+    for (const item in habits) {
+        if (habits[item] === 'noHabits') {
+            show = <h1 key={Math.random()}>Add First Habit!</h1>;
+        } else {
+            show.push(<Habit key={Math.random()} data={habits[item]} />);
+        };
+    };
 
     return (
         <div className={classes.container}>
-            {ctx.data.habits.map(item => {
-                if (item === 'noHabits') {
-                    return <h1 key={Math.random()}>Add First Habit!</h1>
-                } else {
-                    return <Habit key={Math.random()} data={item} />
-                }
-                
-            })}
+            {show}
         </div>
-    )
+    );
 };

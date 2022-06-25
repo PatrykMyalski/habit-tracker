@@ -11,6 +11,10 @@
     border-radius: 2rem;
 }
 
+.container h2 {
+    color: red;
+}
+
 .habit_input {
     all: unset;
     border: 1px solid black;
@@ -20,6 +24,10 @@
     font-size: 2rem;
     border-radius: 1rem;
     padding: 0.5rem;
+}
+.invalid {
+    border: 1px solid red;
+    background-color: rgb(255, 157, 157);
 }
 
 .container select {

@@ -22,6 +22,7 @@ const ModalOverlay = (props) => {
     const loginUser = (data) => {
         for (const item in data) {
             if (data[item].user === username.trim()) {
+                ctx.key = item;
                 ctx.data = data[item];
                 props.onClick();
             } else {
