@@ -16,13 +16,20 @@ const ModalOverlay = (props) => {
     const existingHabits = ctx.data.habits;
 
     const validationCheck = () => {
-        for (const item in existingHabits) {
-            if (existingHabits[item].name.trim() === habitName.trim()) {
-                setHabitExist(true);
-                return false;
+        if (existingHabits[0] === 'noHabits') {
+            addHabit(`https://habit-tracker-b1444-default-rtdb.europe-west1.firebasedatabase.app/data/users/${ctx.key}/habits/0/.json`,
+                { method: 'DELETE' }, succesfulDelete, unSuccesfulDelete);
+            return true;
+        } else {
+            for (const item in existingHabits) {
+                if (existingHabits[item].name.trim() === habitName.trim()) {
+                    setHabitExist(true);
+                    return false;
+                };
             };
+            return true;
         };
-        return true;
+
     };
     const submitHandler = (event) => {
         event.preventDefault();
@@ -40,6 +47,9 @@ const ModalOverlay = (props) => {
             };
         };
     };
+
+    const succesfulDelete = () => { };
+    const unSuccesfulDelete = () => { };
 
     const habitsAdded = () => {
         ctx.added++

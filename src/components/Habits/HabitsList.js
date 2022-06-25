@@ -31,7 +31,7 @@ export const HabitsList = () => {
         if (habits[item] === 'noHabits') {
             show = <h1 key={Math.random()}>Add First Habit!</h1>;
         } else {
-            show.push(<Habit key={Math.random()} data={habits[item]} />);
+            show.push(<Habit key={Math.random()} data={habits[item]} user={ctx.key} habitId={item}/>);
         };
     };
 
