@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import classes from './habits.module.css';
 import { useHttp } from '../../hook/api-call';
+import { Week } from './Week';
 
 export const Habit = (props) => {
 
@@ -37,14 +38,14 @@ export const Habit = (props) => {
             passingStrike();
         };
     };
+    const name = props.data.name[0].toUpperCase() + props.data.name.slice(1);
 
     return (
         <div className={classes.habit}>
-            <h2 className={classes.name}>{props.data.name}</h2>
+            <h2 className={classes.name}>{name}</h2>
+            <Week decrease={decrementHandler} increase={incrementHandler} habitId={props.habitId} />
             <h2>{strike}</h2>
             <div className={classes.btn_container}>
-                <button type='button' onClick={incrementHandler} className={classes.increment}>+</button>
-                <button type='button' onClick={decrementHandler} className={classes.decrement}>-</button>
             </div>
         </div>
     );

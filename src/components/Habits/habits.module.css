@@ -21,7 +21,7 @@
 }
 
 .name {
-    width: 50%;
+    width: 40%;
     text-align: left;
 }
 
@@ -42,7 +42,7 @@
 }
 
 .increment {
-    background-color: green;
+    background-color: rgb(0, 180, 0);
 }
 
 .decrement {
@@ -57,4 +57,14 @@
 
 .decrement:active {
     background-color: rgb(180, 0, 0);
+}
+
+.weekContainer {
+    margin-top: 0.25rem;
+    margin-right: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+.weekContainer h4 {
+    cursor: pointer;
 }

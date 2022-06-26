@@ -41,7 +41,7 @@ const ModalOverlay = (props) => {
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ name: habitName, strike: 0, interval: habitInterval })
+                        body: JSON.stringify({ name: habitName, strike: 0, interval: habitInterval, whenCompleted: ['0'] })
                     },
                     habitsAdded, invalidRequest);
             };
