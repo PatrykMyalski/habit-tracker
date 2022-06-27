@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import classes from './login.module.css';
 import { Backdrop } from '../Backdrop/Backdrop';
 import ReactDOM from "react-dom";
@@ -9,19 +9,20 @@ import { HabitsContext } from '../data/habits-context';
 const ModalOverlay = (props) => {
 
     const [username, setUserName] = useState(null);
+    const [registration, setRegistration] = useState(false);
     const [showError, setShowError] = useState(false);
     const { sendRequest: login } = useHttp();
     const ctx = useContext(HabitsContext);
+
+    useEffect(() => {
+        setRegistration(ctx.isLoggedIn);
+    }, [ctx.isLoggedIn]);
 
     const submitHandler = (event) => {
         event.preventDefault();
         login(`https://habit-tracker-b1444-default-rtdb.europe-west1.firebasedatabase.app/data/users.json`,
             { method: 'GET' }, loginUser, invalidUser);
     };
-
-
-    // let date = new Date();
-    // console.log(date.getDate())
 
     const loginUser = (data) => {
         for (const item in data) {
@@ -36,7 +37,6 @@ const ModalOverlay = (props) => {
     };
 
     const invalidUser = () => {
-        console.log('no')
         setShowError(true);
     };
 
@@ -60,6 +60,7 @@ const ModalOverlay = (props) => {
             <h1>Login</h1>
             <div>
                 <input type='text' placeholder='Username' className={`${classes.login_input} ${showError && classes.invalid}`} onChange={(event) => { setUserName(event.target.value) }} />
+                {registration & !showError && <h1>Successfully registered!</h1>}
                 {showError && <h2>Cannot find user.</h2>}
             </div>
 

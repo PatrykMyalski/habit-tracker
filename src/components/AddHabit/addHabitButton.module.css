@@ -1,6 +1,5 @@
 .btn {
     all: unset;
-
     margin: 2rem 0;
     cursor: pointer;
     background-color: rgb(32, 131, 32);
@@ -9,15 +8,18 @@
     padding: 1rem;
     border-radius: 2rem;
     border: 0.25rem rgb(34, 34, 34) solid;
-    transition: color 200ms, border 200ms,  padding 50ms, margin 50ms;
+    transition: color 200ms, border 200ms,  padding 50ms, margin 50ms, box-shadow 100ms;
 }
 
 .btn:hover {
     color: white;
     border-color: rgba(255, 255, 255);
     background-color: rgb(32, 160, 32);
+    
 }
 .btn:active {
     padding: 1.25rem;
     margin-bottom: 1.5rem;
+    box-shadow: 0 0 1rem 0.5rem black;
+ 
 }

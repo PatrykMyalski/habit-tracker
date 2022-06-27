@@ -1,12 +1,30 @@
 .container {
     width: 40rem;
     margin: auto;
-    padding: 4rem 2rem;
+    padding: 1.75rem 2rem;
     background-color: rgba(30, 30, 30, 0.7);
     border-radius: 4rem;
 }
+
 .container h1 {
     color: white;
+}
+
+.info {
+    display: flex;
+    color: white;
+    font-size: 0.75rem;
+    justify-content: space-between;
+}
+
+.info_name {
+    width: 25%;
+    text-align: left;
+}
+
+.info_counter {
+    width: 15%;
+    margin: 0;
 }
 
 .habit {
@@ -65,6 +83,7 @@
     display: flex;
     gap: 1rem;
 }
+
 .weekContainer h4 {
     cursor: pointer;
 }

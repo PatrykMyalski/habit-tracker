@@ -35,6 +35,7 @@ const ModalOverlay = (props) => {
                     })
                 },
                 registerUser, invalidUser);
+            ctx.isLoggedIn = true;
             props.onClick();
         } else {
             if (usernameTaken) {

@@ -37,6 +37,11 @@ export const HabitsList = () => {
 
     return (
         <div className={classes.container}>
+            <div className={classes.info}>
+                <h2 className={classes.info_name}>Habit name</h2>
+                <h2>Last 7 days</h2>
+                <h2 className={classes.info_counter}>Times Completed</h2>
+            </div>
             {show}
         </div>
     );
