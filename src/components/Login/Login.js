@@ -46,7 +46,6 @@ const ModalOverlay = (props) => {
     };
 
     const saveUsersToContext = (data) => {
-        console.log('yes')
         let usersArr = []
         for (const item in data) {
             usersArr.push(data[item].user);

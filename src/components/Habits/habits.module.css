@@ -18,12 +18,19 @@
 }
 
 .info_name {
-    width: 25%;
+    width: 17%;
     text-align: left;
 }
 
 .info_counter {
     width: 15%;
+    margin: 0;
+}
+.info_week {
+    margin-right: 1rem;
+}
+.info_delete {
+    width: 10%;
     margin: 0;
 }
 
@@ -38,8 +45,15 @@
     background-color: rgb(29, 29, 29);
 }
 
+.habit h1 {
+    color: red;
+    cursor: pointer;
+    margin: 0;
+    margin-top: 0.80rem;
+}
+
 .name {
-    width: 40%;
+    width: 30%;
     text-align: left;
 }
 

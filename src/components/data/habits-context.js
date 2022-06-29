@@ -5,6 +5,7 @@ export const HabitsContext = React.createContext({
     key: null,
     added: 0,
     users: null,
-    isLoggedIn: false
+    isLoggedIn: false,
+    habitsCount: null
 });
 

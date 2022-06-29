@@ -40,7 +40,6 @@ export const WeekDay = (props) => {
     };
 
     const passData = (data) => {
-        console.log('running')
         for (const item in data) {
             if (data[item].date === date){
                 setColor(true);

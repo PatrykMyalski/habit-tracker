@@ -11,6 +11,7 @@ const ModalOverlay = (props) => {
     const [habitName, setHabitName] = useState('');
     const [habitInterval, setHabitInterval] = useState('daily');
     const [habitExist, setHabitExist] = useState(false);
+    const [lengthError, setLengthError] = useState(false);
     const { sendRequest: addHabit } = useHttp();
 
     const existingHabits = ctx.data.habits;
@@ -24,6 +25,7 @@ const ModalOverlay = (props) => {
             for (const item in existingHabits) {
                 if (existingHabits[item].name.trim() === habitName.trim()) {
                     setHabitExist(true);
+                    setLengthError(false);
                     return false;
                 };
             };
@@ -33,7 +35,7 @@ const ModalOverlay = (props) => {
     };
     const submitHandler = (event) => {
         event.preventDefault();
-        if (habitName.trim().length > 2) {
+        if (habitName.trim().length >= 2 & habitName.trim().length <= 16) {
             if (validationCheck()) {
                 addHabit(`https://habit-tracker-b1444-default-rtdb.europe-west1.firebasedatabase.app/data/users/${ctx.key}/habits.json`,
                     {
@@ -45,7 +47,10 @@ const ModalOverlay = (props) => {
                     },
                     habitsAdded, invalidRequest);
             };
-        };
+        } else {
+            setLengthError(true);
+            setHabitExist(false);
+        }
     };
 
     const succesfulDelete = () => { };
@@ -61,8 +66,9 @@ const ModalOverlay = (props) => {
     return (
         <form className={classes.container} onSubmit={submitHandler}>
             <div>
-                <input type='text' placeholder='Habit name' className={`${classes.habit_input} ${habitExist && classes.invalid}`} onChange={(event) => { setHabitName(event.target.value) }} />
+                <input type='text' placeholder='Habit name' className={`${classes.habit_input} ${habitExist || lengthError ? classes.invalid : ''}`} onChange={(event) => { setHabitName(event.target.value) }} />
                 {habitExist && <h2>That habit already exist!</h2>}
+                {lengthError && <h2>Habit name should be between 2 and 16 characters!</h2>}
             </div>
             <div>
                 <select name="duration" id="duration" onChange={(event) => { setHabitInterval(event.target.value) }}>
