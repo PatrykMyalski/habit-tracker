@@ -7,7 +7,7 @@ import { HabitsContext } from '../data/habits-context';
 export const Habit = (props) => {
 
     const [strikeDOM, setStrikeDOM] = useState(props.data.strike);
-    const { sendRequest: sendRequest } = useHttp()
+    const sendRequest = useHttp()
     const ctx = useContext(HabitsContext);
     let strike = strikeDOM;
 
@@ -21,10 +21,9 @@ export const Habit = (props) => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(strike)
-            },
-            succesfulUpdate, unSuccesfulUpdate);
+            });
     };
-    
+
     const deleteHandler = () => {
         if (ctx.habitsCount === 1) {
             sendRequest(`https://habit-tracker-b1444-default-rtdb.europe-west1.firebasedatabase.app/data/users/${props.user}/habits/.json`, {
@@ -35,17 +34,10 @@ export const Habit = (props) => {
                 body: JSON.stringify(['noHabits'])
             });
         };
-        sendRequest(`https://habit-tracker-b1444-default-rtdb.europe-west1.firebasedatabase.app/data/users/${props.user}/habits/${props.habitId}/.json`, 
-        {method: 'DELETE'}, succesfulDelete, unSuccesfulUpdate)
-        setTimeout(() => {props.onDelete()}, 40)
-        
-        
-    };
-
-    const succesfulDelete = () => {
-    };
-    const succesfulUpdate = () => { };
-    const unSuccesfulUpdate = () => { 
+        sendRequest(`https://habit-tracker-b1444-default-rtdb.europe-west1.firebasedatabase.app/data/users/${props.user}/habits/${props.habitId}/.json`,
+            { method: 'DELETE' }
+        );
+        setTimeout(() => { props.onDelete() }, 60);
     };
 
     const incrementHandler = () => {
@@ -61,6 +53,7 @@ export const Habit = (props) => {
             passingStrike();
         };
     };
+
     const name = props.data.name[0].toUpperCase() + props.data.name.slice(1);
 
     return (

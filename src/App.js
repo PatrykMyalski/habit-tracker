@@ -24,8 +24,6 @@ const navReducer = (state, action) => {
 
 };
 
-
-
 function App() {
 
   const [navState, dispatchNav] = useReducer(navReducer, {
@@ -48,7 +46,7 @@ function App() {
   };
 
   return (
-    <div className={classes.main}>
+    <div style={{textAlign: 'center'}}>
       {!navState.showLogin & !navState.showRegister && <AddHabitButton onClick={addHabitHandler} />}
       {!navState.showLogin & !navState.showRegister && <HabitsList /> }
       {navState.showLogin && <Login onClick={loginHandler} onRegister={newUserHandler} />}

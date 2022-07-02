@@ -8,28 +8,27 @@ export const HabitsList = () => {
 
     const ctx = useContext(HabitsContext);
 
-    const { sendRequest: getHabits } = useHttp();
+    const getHabits = useHttp();
     const [habits, setHabits] = useState(ctx.data.habits);
     const [update, setUpadte] = useState(false);
     const [showInfo, setShowInfo] = useState(false);
-    
+
 
     let show = [];
     useEffect(() => {
         getHabits(`https://habit-tracker-b1444-default-rtdb.europe-west1.firebasedatabase.app/data/users/${ctx.key}.json`,
-            { method: 'GET' }, habitsProvider, errorHandler);
+            { method: 'GET' }, habitsProvider);
 
     }, [ctx.added, update]);
 
     const deleteHandler = () => {
-        setUpadte(!update)
+        setUpadte(!update);
     };
     const habitsProvider = (data) => {
         setHabits(data.habits);
         ctx.data = data;
-        ctx.habitsCount = Object.keys(data.habits).length
+        ctx.habitsCount = Object.keys(data.habits).length;
     };
-    const errorHandler = () => { };
 
     const changeShowInfo = (arg) => {
         if (arg !== showInfo) {
@@ -46,7 +45,7 @@ export const HabitsList = () => {
             show.push(<Habit key={Math.random()} data={habits[item]} user={ctx.key} habitId={item} onDelete={deleteHandler} />);
         };
     };
-    
+
     const info =
         <div className={classes.info}>
             <h2 className={classes.info_name}>Habit name</h2>

@@ -6,7 +6,7 @@ export const WeekDay = (props) => {
 
     const [color, setColor] = useState(false);
     const [timeId, setTimeId] = useState(null);
-    const { sendRequest: dateHandler } = useHttp();
+    const dateHandler = useHttp();
     const ctx = useContext(HabitsContext);
 
     let date = new Date(props.dateMS);
@@ -15,7 +15,7 @@ export const WeekDay = (props) => {
 
     useEffect(() => {
         dateHandler(`https://habit-tracker-b1444-default-rtdb.europe-west1.firebasedatabase.app/data/users/${ctx.key}/habits/${props.habitId}/whenCompleted/.json`,
-        {method: 'GET'}, passData, unsuccesful);
+            { method: 'GET' }, passData);
     }, [])
 
     const clickHandler = () => {
@@ -28,10 +28,10 @@ export const WeekDay = (props) => {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({ date })
-                }, succesful, unsuccesful);
+                }, succesful);
         } else {
             dateHandler(`https://habit-tracker-b1444-default-rtdb.europe-west1.firebasedatabase.app/data/users/${ctx.key}/habits/${props.habitId}/whenCompleted/${timeId}.json`,
-                { method: 'DELETE' }, succesfulDelete, unSuccesfulDelete);
+                { method: 'DELETE' });
         };
         color ? props.decrease() : props.increase();
     };
@@ -41,16 +41,12 @@ export const WeekDay = (props) => {
 
     const passData = (data) => {
         for (const item in data) {
-            if (data[item].date === date){
+            if (data[item].date === date) {
                 setColor(true);
                 break;
             };
         };
     };
-
-    const unsuccesful = () => { };
-    const succesfulDelete = () => { };
-    const unSuccesfulDelete = () => { };
 
     const complete = {
         color: 'rgb(0, 180, 0)'

@@ -12,7 +12,7 @@ const ModalOverlay = (props) => {
     const [newUserName, setNewUserName] = useState(null);
     const [shortError, setShortError] = useState(false);
     const [taken, setTaken] = useState(false);
-    const { sendRequest: register } = useHttp();
+    const register = useHttp();
     const ctx = useContext(HabitsContext);
 
     let usernameTaken = false;
@@ -33,8 +33,7 @@ const ModalOverlay = (props) => {
                         habits: ['noHabits'],
                         user: newUserName
                     })
-                },
-                registerUser, invalidUser);
+                });
             ctx.isLoggedIn = true;
             props.onClick();
         } else {
@@ -46,11 +45,7 @@ const ModalOverlay = (props) => {
                 setTaken(false);
             };
         };
-
     };
-
-    const registerUser = () => { };
-    const invalidUser = () => { };
 
     return (
         <form className={classes.container} onSubmit={submitHandler}>

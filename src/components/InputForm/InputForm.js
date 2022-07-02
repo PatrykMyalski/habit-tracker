@@ -12,14 +12,14 @@ const ModalOverlay = (props) => {
     const [habitInterval, setHabitInterval] = useState('daily');
     const [habitExist, setHabitExist] = useState(false);
     const [lengthError, setLengthError] = useState(false);
-    const { sendRequest: addHabit } = useHttp();
+    const addHabit = useHttp();
 
     const existingHabits = ctx.data.habits;
 
     const validationCheck = () => {
         if (existingHabits[0] === 'noHabits') {
             addHabit(`https://habit-tracker-b1444-default-rtdb.europe-west1.firebasedatabase.app/data/users/${ctx.key}/habits/0/.json`,
-                { method: 'DELETE' }, succesfulDelete, unSuccesfulDelete);
+                { method: 'DELETE' });
             return true;
         } else {
             for (const item in existingHabits) {
@@ -44,24 +44,19 @@ const ModalOverlay = (props) => {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({ name: habitName, strike: 0, interval: habitInterval, whenCompleted: ['0'] })
-                    },
-                    habitsAdded, invalidRequest);
+                    },habitsAdded);
             };
         } else {
             setLengthError(true);
             setHabitExist(false);
-        }
+        };
     };
 
-    const succesfulDelete = () => { };
-    const unSuccesfulDelete = () => { };
 
     const habitsAdded = () => {
-        ctx.added++
+        ctx.added++;
         props.onClick();
     };
-
-    const invalidRequest = () => { };
 
     return (
         <form className={classes.container} onSubmit={submitHandler}>
@@ -95,5 +90,5 @@ export const InputForm = (props) => {
                 <ModalOverlay onClick={clickHandler} />,
                 document.getElementById('modal-root'))}
         </React.Fragment>
-    )
+    );
 };

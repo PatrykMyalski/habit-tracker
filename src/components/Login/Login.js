@@ -11,7 +11,7 @@ const ModalOverlay = (props) => {
     const [username, setUserName] = useState(null);
     const [registration, setRegistration] = useState(false);
     const [showError, setShowError] = useState(false);
-    const { sendRequest: login } = useHttp();
+    const  login  = useHttp();
     const ctx = useContext(HabitsContext);
 
     useEffect(() => {
