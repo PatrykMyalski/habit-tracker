@@ -59,7 +59,7 @@ const ModalOverlay = (props) => {
             <h1>Login</h1>
             <div>
                 <input type='text' placeholder='Username' className={`${classes.login_input} ${showError && classes.invalid}`} onChange={(event) => { setUserName(event.target.value) }} />
-                {registration & !showError && <h1>Successfully registered!</h1>}
+                { registration & !showError ? <h1>Successfully registered!</h1> : <div></div>}
                 {showError && <h2>Cannot find user.</h2>}
             </div>
 

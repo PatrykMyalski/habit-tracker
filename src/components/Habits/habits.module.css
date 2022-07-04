@@ -25,6 +25,7 @@
 .info_counter {
     width: 15%;
     margin: 0;
+    padding-right: 1.4rem;
 }
 .info_week {
     margin-right: 1rem;
@@ -57,47 +58,80 @@
     text-align: left;
 }
 
-.btn_container {
-    margin: 1.35rem 0;
-    display: flex;
-    gap: 1rem;
-}
-
-.increment,
-.decrement {
-    all: unset;
-    cursor: pointer;
-    padding: 0 0.75rem;
-    border-radius: 2px;
-    transition: 50ms;
-    color: black;
-}
-
-.increment {
-    background-color: rgb(0, 180, 0);
-}
-
-.decrement {
-    font-size: 1.25rem;
-    background-color: red;
-
-}
-
-.increment:active {
-    background-color: rgb(0, 180, 0);
-}
-
-.decrement:active {
-    background-color: rgb(180, 0, 0);
-}
-
 .weekContainer {
     margin-top: 0.25rem;
     margin-right: 1rem;
+    margin-left: 2rem;
     display: flex;
     gap: 1rem;
 }
 
 .weekContainer h4 {
     cursor: pointer;
+}
+
+@media screen and (max-width: 710px) {
+    .container {
+        width: 30rem;
+    }
+    .info {
+        font-size: 0.5rem;
+    }
+    .info_name {
+        width: 20%;
+        margin-left: 1rem;
+    }
+    .info_counter {
+        padding: 0;
+    }
+    .info_delete {
+        margin-right: 0.5rem;
+    }
+    .habit h1 {
+        margin-top: 0.5rem;
+    }
+    .habit h2 {
+        font-size: 1.25rem;
+        margin-top: 1.25rem;
+    }
+    .weekContainer {
+        gap: 0.5rem;
+    }
+    .weekContainer h4 {
+        margin-top: 1rem;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .container {
+        width: auto;
+        border-radius: 0;
+    }
+    .info {
+        font-size: 0.4rem;
+        justify-content: space-between;
+    }
+    .info_name {
+        width: auto; 
+    }
+    .name {
+        width: auto;
+        text-align: left;
+    }
+    .habit {
+        justify-content: space-between;
+    }
+    .habit h1 {
+        margin-top: 0.9rem;
+        margin-right: 1.2rem;
+        font-size: 1.1rem;
+    }
+    .habit h2 {
+        margin-top: 1rem;
+        font-size: 1rem;
+    }
+    .weekContainer h4 {
+        margin-top: 1rem;
+        font-size: 0.75rem;
+    }
 }

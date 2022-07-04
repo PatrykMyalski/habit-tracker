@@ -8,15 +8,25 @@ export const WeekDay = (props) => {
     const [timeId, setTimeId] = useState(null);
     const dateHandler = useHttp();
     const ctx = useContext(HabitsContext);
-
     let date = new Date(props.dateMS);
     date = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
 
+    const passData = (data) => {
+        for (const item in data) {
+            if (data[item].date === date) {
+                setTimeId(item);
+                setColor(true);
+                break;
+            };
+        };
+    };
 
     useEffect(() => {
         dateHandler(`https://habit-tracker-b1444-default-rtdb.europe-west1.firebasedatabase.app/data/users/${ctx.key}/habits/${props.habitId}/whenCompleted/.json`,
-            { method: 'GET' }, passData);
+        { method: 'GET' }, passData);
     }, [])
+
+    
 
     const clickHandler = () => {
         setColor(!color);
@@ -29,24 +39,22 @@ export const WeekDay = (props) => {
                     },
                     body: JSON.stringify({ date })
                 }, succesful);
+                console.log('posting')
         } else {
+            console.log('deleting')
+            console.log(ctx.key)
+            console.log(props.habitId)
+            console.log(timeId)
             dateHandler(`https://habit-tracker-b1444-default-rtdb.europe-west1.firebasedatabase.app/data/users/${ctx.key}/habits/${props.habitId}/whenCompleted/${timeId}.json`,
                 { method: 'DELETE' });
         };
         color ? props.decrease() : props.increase();
     };
+
     const succesful = (data) => {
         setTimeId(data.name);
     };
 
-    const passData = (data) => {
-        for (const item in data) {
-            if (data[item].date === date) {
-                setColor(true);
-                break;
-            };
-        };
-    };
 
     const complete = {
         color: 'rgb(0, 180, 0)'
@@ -58,3 +66,5 @@ export const WeekDay = (props) => {
 
     return <h4 onClick={clickHandler} style={color ? complete : incomplete} >{props.day}</h4>
 };
+
+// strike się zmienia, ale jest problem z usuwaniem z bazy danych przez co strike się zmienia, ale data pozostaje w bazie danych i zmienia się kolor dnia tygodnia 

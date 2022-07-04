@@ -1,7 +1,27 @@
+import { useEffect, useState } from 'react';
 import classes from './habits.module.css';
 import { WeekDay } from './WeekDay';
 
+
 export const Week = (props) => {
+
+    const [width, setWidth] = useState(window.innerWidth);
+    const breakpoint = 710;
+    const [responsive, setResponsive] = useState(width < breakpoint)
+
+    useEffect(() => {
+        window.addEventListener("resize", () => setWidth(window.innerWidth))
+    }, [])
+
+
+    // responsive true when width < 710px
+    useEffect(() => {
+        setResponsive(width < breakpoint)
+        if (responsive !== (width < breakpoint)) {
+            props.responsive(width < breakpoint)
+        };
+    }, [width, breakpoint])
+    
 
     const dayInMS = 86400000;
     const now = Date.now();
@@ -23,6 +43,9 @@ export const Week = (props) => {
         if (week[i].value === today) {
             const removed = week.splice(0, i);
             newWeek = week.concat(removed);
+            if (responsive) {
+                newWeek.splice(-3)
+            }
             let j = 0;
             for (j in newWeek) {
                 newWeek[j] = { ...newWeek[j], date: now - j * dayInMS };
