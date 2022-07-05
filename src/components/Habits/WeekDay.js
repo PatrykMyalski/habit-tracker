@@ -66,5 +66,3 @@ export const WeekDay = (props) => {
 
     return <h4 onClick={clickHandler} style={color ? complete : incomplete} >{props.day}</h4>
 };
-
-// strike się zmienia, ale jest problem z usuwaniem z bazy danych przez co strike się zmienia, ale data pozostaje w bazie danych i zmienia się kolor dnia tygodnia 
